@@ -106,6 +106,7 @@ namespace libraryForm
                 }
             }
         }
+
       /*  public bool checkSY()
         {
             using (SqlConnection conn = new SqlConnection("server=Library\\SQLEXPRESS;database=SJAB_DB;Trusted_Connection=True;"))
@@ -135,6 +136,7 @@ namespace libraryForm
                     return true;
             }
         } */
+
         public void gradelvcomrefresh(MetroFramework.Controls.MetroComboBox com)
         {
             if (checkiftableexists("Grade_Section"))

@@ -65,14 +65,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Library Users.exe" size="3027456">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Library Users.exe" size="3026432">
       <assemblyIdentity name="Library Users" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YyfGH4SGvdKQeXWfOHJaFRklNmg195USBf1c/udP+rU=</dsig:DigestValue>
+        <dsig:DigestValue>bbwrbk8IniWil9i3LBTfTTjLjGpPF3jz4QH+UNRm2EA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -112,6 +112,15 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="Database1.sdf" size="86016" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>QD0Yv6Gv32twuWWWeDE2ubTtq72b2rvvtsQrdpgPdk4=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="MetroFramework.txt" size="1266">
     <hash>
       <dsig:Transforms>

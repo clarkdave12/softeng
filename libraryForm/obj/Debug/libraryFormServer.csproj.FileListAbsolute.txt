@@ -32,3 +32,38 @@ C:\Users\Clark Dave\Desktop\libraryForm\libraryForm\libraryForm\obj\Debug\Librar
 C:\Users\Clark Dave\Desktop\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.application
 C:\Users\Clark Dave\Desktop\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.exe
 C:\Users\Clark Dave\Desktop\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.pdb
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.exe
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.pdb
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\Library Users.exe.manifest
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\Library Users.application
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\Library Users.exe
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\Library Users.pdb
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\MetroFramework.Design.dll
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\MetroFramework.dll
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\mscorlib.dll
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\System.Net.Http.dll
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\System.Net.Http.xml
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\normidna.nlp
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\normnfc.nlp
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\normnfd.nlp
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\normnfkc.nlp
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\normnfkd.nlp
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryFormServer.csprojResolveAssemblyReference.cache
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.Add_Students.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.Edit_Students.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.Form10.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.Form1.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.AddUsers.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.EditUsers.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.InputBookStats.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.Login.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.Others.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.PasswordPrompt.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.Properties.Resources.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryForm.visitsLog.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\libraryFormServer.csproj.GenerateResource.Cache
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.TrustInfo.xml
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.exe.manifest
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.application
+C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\Database1.sdf
