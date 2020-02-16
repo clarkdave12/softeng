@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -25,58 +25,55 @@ namespace libraryForm
             int i = 0;
             if (!string.IsNullOrWhiteSpace(searchbox.Text))
             {
-
-                using (SqlConnection conn = new SqlConnection("server=Library\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=false;"))
+                Connection.OpenConnection();
+                int found = 0;
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM studentinfo", Connection.conn))
                 {
-                    int found = 0;
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM studentinfo", conn))
+                    int count = (int)cmd.ExecuteScalar();
+                    studentIDs = new string[count];
+                    studentDetails = new string[count];
+                }
+                using (SqlCommand cmd = new SqlCommand("SELECT studentID, lName, fName FROM studentinfo", Connection.conn))
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    int c1 = 0;
+                    while (reader.Read())
                     {
-                        int count = (int)cmd.ExecuteScalar();
-                        studentIDs = new string[count];
-                        studentDetails = new string[count];
+                        studentIDs[c1] = reader[0].ToString();
+                        studentDetails[c1] = reader[0].ToString() + "-" + reader[1].ToString() + "-" + reader[2].ToString();
+                        c1++;
                     }
-                    using (SqlCommand cmd = new SqlCommand("SELECT studentID, lName, fName FROM studentinfo", conn))
+                    reader.Close();
+                }
+                int c = 0;
+                foreach (string detail in studentDetails)
+                {
+                    if (detail.ToUpper().Contains(searchbox.Text.ToUpper().Trim()))
                     {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        int c1 = 0;
-                        while (reader.Read())
-                        {
-                            studentIDs[c1] = reader[0].ToString();
-                            studentDetails[c1] = reader[0].ToString() + "-" + reader[1].ToString() + "-" + reader[2].ToString();
-                            c1++;
-                        }
-                        reader.Close();
-                    }
-                    int c = 0;
-                    foreach (string detail in studentDetails)
-                    {
-                        if (detail.ToUpper().Contains(searchbox.Text.ToUpper().Trim()))
-                        {
-                            string[] details = detail.Split('-');
+                        string[] details = detail.Split('-');
 
-                            using (SqlCommand cmd = new SqlCommand("SELECT * FROM studentinfo WHERE [studentID] = '" + details[0] + "'", conn))
+                        using (SqlCommand cmd = new SqlCommand("SELECT * FROM studentinfo WHERE [studentID] = '" + details[0] + "'", Connection.conn))
+                        {
+                            SqlDataReader reader = cmd.ExecuteReader();
+                            while (reader.Read())
                             {
-                                SqlDataReader reader = cmd.ExecuteReader();
-                                while (reader.Read())
-                                {
-                                    viewgrid.Rows.Add();
-                                    viewgrid.Rows[c].Cells[0].Value = reader[0].ToString();
-                                    viewgrid.Rows[c].Cells[1].Value = reader[1].ToString();
-                                    viewgrid.Rows[c].Cells[2].Value = reader[2].ToString();
-                                    viewgrid.Rows[c].Cells[3].Value = reader[3].ToString();
-                                    viewgrid.Rows[c].Cells[4].Value = reader[4].ToString();
-                                    viewgrid.Rows[c].Cells[5].Value = reader[7].ToString();
-                                    viewgrid.Rows[c].Cells[6].Value = reader[9].ToString();
-                                    viewgrid.Rows[c].Cells[7].Value = reader[10].ToString();
-                                    c++;
-                                    found++;
-                                }
-                                reader.Close();
+                                viewgrid.Rows.Add();
+                                viewgrid.Rows[c].Cells[0].Value = reader[0].ToString();
+                                viewgrid.Rows[c].Cells[1].Value = reader[1].ToString();
+                                viewgrid.Rows[c].Cells[2].Value = reader[2].ToString();
+                                viewgrid.Rows[c].Cells[3].Value = reader[3].ToString();
+                                viewgrid.Rows[c].Cells[4].Value = reader[4].ToString();
+                                viewgrid.Rows[c].Cells[5].Value = reader[7].ToString();
+                                viewgrid.Rows[c].Cells[6].Value = reader[9].ToString();
+                                viewgrid.Rows[c].Cells[7].Value = reader[10].ToString();
+                                c++;
+                                found++;
                             }
+                            reader.Close();
                         }
                     }
                 }
+                Connection.CloseConnection();
             }
         }
 
@@ -122,14 +119,12 @@ namespace libraryForm
                     dialog = MessageBox.Show("Confirm delete student?", "Warning", MessageBoxButtons.YesNo);
                     if (dialog == DialogResult.Yes)
                     {
-                        using (SqlConnection conn = new SqlConnection("server=Library\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=false;"))
+                        Connection.OpenConnection();
+                        using (SqlCommand cmd = new SqlCommand("DELETE FROM studentInfo WHERE studentID = '" + studNum + "'", Connection.conn))
                         {
-                            conn.Open();
-                            using (SqlCommand cmd = new SqlCommand("DELETE FROM studentInfo WHERE studentID = '" + studNum + "'", conn))
-                            {
-                                cmd.ExecuteNonQuery();
-                            }
+                            cmd.ExecuteNonQuery();
                         }
+                        Connection.CloseConnection();
                         searchbox_ButtonClick(null, null);
                     }
                 }
@@ -143,8 +138,6 @@ namespace libraryForm
         {
             search();
         }
-        Timer clipNotif = new Timer();
-        int clipTime, tickRepeat = 0;
 
         private void copyBtn_Click(object sender, EventArgs e)
         {
@@ -155,38 +148,38 @@ namespace libraryForm
                     Clipboard.SetText(viewgrid.CurrentRow.Cells[0].Value.ToString());
                     //  MessageBox.Show("Student number added to clipboard!");
                     clipPanel.Visible = true;
-                    clipTime = 0;
+                    Singleton.clipTime = 0;
                     clipPanel.Left = copyBtn.Left - 18;
                     clipPanel.Top = copyBtn.Top - 10 - clipPanel.Height;
-                    clipNotif.Interval = 5;
-                    clipNotif.Tick += new EventHandler(clip_Tick);
-                    clipNotif.Start();
+                    Singleton.clipNotif.Interval = 5;
+                    Singleton.clipNotif.Tick += new EventHandler(clip_Tick);
+                    Singleton.clipNotif.Start();
                 }
             }
         }
 
         private void clip_Tick(object sender, EventArgs e)
         {
-            clipTime += 5;
-            if (clipTime >= 150)
+            Singleton.clipTime += 5;
+            if (Singleton.clipTime >= 150)
             {
-                tickRepeat++;
-                clipNotif.Tick += new EventHandler(clip_Move);
+                Singleton.tickRepeat++;
+                Singleton.clipNotif.Tick += new EventHandler(clip_Move);
             }
         }
 
         private void clip_Move(object sender, EventArgs e)
         {
             clipPanel.Top -= 1;
-            if (clipTime >= 250)
+            if (Singleton.clipTime >= 250)
             {
-                clipNotif.Stop();
-                clipNotif.Tick -= clip_Tick;
-                for (int i = 0; i < tickRepeat; i++)
+                Singleton.clipNotif.Stop();
+                Singleton.clipNotif.Tick -= clip_Tick;
+                for (int i = 0; i < Singleton.tickRepeat; i++)
                 {
-                    clipNotif.Tick -= new EventHandler(clip_Move);
+                    Singleton.clipNotif.Tick -= new EventHandler(clip_Move);
                 }
-                tickRepeat = 0;
+                Singleton.tickRepeat = 0;
                 clipPanel.Visible = false;
             }
         }
@@ -319,21 +312,18 @@ namespace libraryForm
                 {
                     midNameBox.Text += ".";
                 }
-                using (SqlConnection conn = new SqlConnection("server=Library\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=false;"))
+                Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("UPDATE studentInfo SET lName ='" + lastNameBox.Text + "', " +
+                                                                              "fName ='" + firstNameBox.Text + "', " +
+                                                                              "mName ='" + midNameBox.Text + "', " +
+                                                                              "course = '" + updateCourse + "', " +
+                                                                              "gender = '" + gendercom.Text + "' " +
+                                                                              "WHERE studentID = '" + editStudNo.Text + "'", Connection.conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE studentInfo SET lName ='" + lastNameBox.Text + "', " +
-                                                                                  "fName ='" + firstNameBox.Text + "', " +
-                                                                                  "mName ='" + midNameBox.Text + "', " +
-                                                                                  "course = '" + updateCourse + "', " +
-                                                                                  "gender = '" + gendercom.Text + "' " +
-                                                                                  "WHERE studentID = '" + editStudNo.Text + "'", conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.ExecuteNonQuery();
                 }
+                Connection.CloseConnection();
                 MessageBox.Show("Student Updated!", "Message");
-
             }
             else if (!string.IsNullOrWhiteSpace(lastNameBox.Text) &&
                 !string.IsNullOrWhiteSpace(firstNameBox.Text) &&
@@ -386,19 +376,17 @@ namespace libraryForm
                 else
                     firstNameBox.Text = firstNameBox.Text.Substring(0, 1).ToUpper() + firstNameBox.Text.Substring(1, firstNameBox.Text.Length - 1).ToLower();
 
-                using (SqlConnection conn = new SqlConnection("server=Library\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=false;"))
+                Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("UPDATE studentInfo SET lName ='" + lastNameBox.Text + "', " +
+                                                                              "fName ='" + firstNameBox.Text + "', " +
+                                                                              "mName =' ', " +
+                                                                              "course = '" + updateCourse + "', " +
+                                                                              "gender = '" + gendercom.Text + "' " +
+                                                                              "WHERE studentID = '" + editStudNo.Text + "'", Connection.conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE studentInfo SET lName ='" + lastNameBox.Text + "', " +
-                                                                                  "fName ='" + firstNameBox.Text + "', " +
-                                                                                  "mName =' ', " +
-                                                                                  "course = '" + updateCourse + "', " +
-                                                                                  "gender = '" + gendercom.Text + "' " +
-                                                                                  "WHERE studentID = '" + editStudNo.Text + "'", conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.ExecuteNonQuery();
                 }
+                Connection.CloseConnection();
                 MessageBox.Show("Student Updated!", "Message");
             }
             else if (firstNameBox.Text.Length < 2)
