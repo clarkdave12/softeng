@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -17,233 +17,215 @@ namespace libraryForm
         {
             InitializeComponent();
 
-            parent = (Form1)this.ParentForm;
+            Singleton.parent = (Form1)this.ParentForm;
 
-            using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+            Connection.OpenConnection();
+            int i = 0;
+            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", Connection.conn))
             {
-
-                conn.Open();
-                int i = 0;
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", conn))
-                {
-                    courseLim = (int)cmd.ExecuteScalar();
-                    courseLim = courseLim - 3;
-                    course = new string[courseLim];
-                }
-                using (SqlCommand cmd = new SqlCommand("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", conn))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        if (i < 2 || i == courseLim + 2)
-                        {
-                            i++;
-                            continue;
-                        }
-                        course[i - 2] = reader[0].ToString();
-                        i++;
-                    }
-                    reader.Close();
-                    i = 0;
-                }
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'dailyBookStats'", conn))
-                {
-                    booksLim = (int)cmd.ExecuteScalar();
-                    booksLim = booksLim - 1;
-                }
-                using (SqlCommand cmd = new SqlCommand("SELECT date FROM [dailyBookStats] ORDER BY recordNumber DESC", conn))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        dailyBooksCom1.Items.Add(reader[0].ToString());
-                    }
-                    booksDatesRad.Checked = true;
-                    dailyBooksCom1.SelectedIndex = 0;
-                    reader.Close();
-                    booksDatesRad.Checked = true;
-                }
+                Singleton.courseLim = (int)cmd.ExecuteScalar();
+                Singleton.courseLim = Singleton.courseLim - 3;
+                Singleton.course = new string[Singleton.courseLim];
             }
+            using (SqlCommand cmd = new SqlCommand("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", Connection.conn))
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (i < 2 || i == Singleton.courseLim + 2)
+                    {
+                        i++;
+                        continue;
+                    }
+                    Singleton.course[i - 2] = reader[0].ToString();
+                    i++;
+                }
+                reader.Close();
+                i = 0;
+            }
+            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'dailyBookStats'", Connection.conn))
+            {
+                Singleton.booksLim = (int)cmd.ExecuteScalar();
+                Singleton.booksLim = Singleton.booksLim - 1;
+            }
+            using (SqlCommand cmd = new SqlCommand("SELECT date FROM [dailyBookStats] ORDER BY recordNumber DESC", Connection.conn))
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dailyBooksCom1.Items.Add(reader[0].ToString());
+                }
+                booksDatesRad.Checked = true;
+                reader.Close();
+                dailyBooksCom1.SelectedIndex = 0;
+                booksDatesRad.Checked = true;
+            }
+            Connection.CloseConnection();
 
         }
-
-        string[] course;
-        int courseLim;
-        int booksLim;
-
-        bool studRad = false;
-        bool bookRadCheck = false;
-
-        Random R = new Random();
-        List<GroupBox> grr = new List<GroupBox>();
-        int colorAlternate = 0;
-
-        int fineAmount = 0;
-        Form1 parent;
-        string borrower;
-        string weekNow, monthYearNow;
+        
         private void BorrowRefresh()
         {
-            using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+            bool connOpen;
+            connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+            if (!connOpen) Connection.OpenConnection();
+            int ii = 0;
+            mainP.Controls.Clear();
+            Singleton.grr.Clear();
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM borrowedBooks WHERE Status='Borrowed'", Connection.conn))
             {
-                int ii = 0;
-                mainP.Controls.Clear();
-                grr.Clear();
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM borrowedBooks WHERE Status='Borrowed'", conn))
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    GroupBox p = new GroupBox();
+                    p.ForeColor = Color.White;
+                    p.Name = "groupB-" + (ii + 1);
+                    if (Singleton.colorAlternate % 2 == 0)
+                        p.BackColor = Color.FromArgb(127, 120, 208);
+                    else
+                        p.BackColor = Color.FromArgb(53, 42, 181);
+                    Singleton.colorAlternate++;
+                    p.Size = new Size(mainP.Width - 17, 130);
+                    Singleton.grr.Add(p);
+                    mainP.Controls.Add(Singleton.grr[ii]);
+                    if (ii == 0)
+                        Singleton.grr[ii].Location = new Point(0, 0);
+                    else
                     {
-                        GroupBox p = new GroupBox();
-                        p.ForeColor = Color.White;
-                        p.Name = "groupB-" + (ii + 1);
-                        if (colorAlternate % 2 == 0)
-                            p.BackColor = Color.FromArgb(127, 120, 208);
-                        else
-                            p.BackColor = Color.FromArgb(53, 42, 181);
-                        colorAlternate++;
-                        p.Size = new Size(mainP.Width - 17, 130);
-                        grr.Add(p);
-                        mainP.Controls.Add(grr[ii]);
-                        if (ii == 0)
-                            grr[ii].Location = new Point(0, 0);
-                        else
-                        {
-                            grr[ii].Location = new Point(0, grr[ii - 1].Bottom);
-                        }
-                        grr[ii].Text = reader[7].ToString();
-                        grr[ii].Font = new Font("Segoe UI", 8F);
-
-                        Graphics g = CreateGraphics();
-
-                        Label borrowID = new Label();
-                        borrowID.Name = "borrowID" + (int.Parse(reader[0].ToString()));
-                        grr[ii].Controls.Add(borrowID);
-                        borrowID.Location = new Point(385, 21);
-                        borrowID.Width = 90;
-                        borrowID.Text = "BorrowID: " + int.Parse(reader[0].ToString());
-
-                        Button returnB = new Button();
-                        returnB.Name = "returnB-" + (int.Parse(reader[0].ToString()));
-                        grr[ii].Controls.Add(returnB);
-                        returnB.BackColor = Color.White;
-                        returnB.ForeColor = Color.Black;
-                        returnB.SetBounds(385, 36, 65, 30);
-                        returnB.Text = "Return";
-                        returnB.BringToFront();
-                        returnB.Click += new EventHandler(returnButton_click);
-
-
-                        Label lname = new Label();
-                        lname.Name = "lname" + (ii + 1);
-                        grr[ii].Controls.Add(lname);
-                        lname.Location = new Point(15, 21);
-                        SizeF size = g.MeasureString("Name: " + reader[2].ToString() + " " + reader[3].ToString() + " " + reader[4].ToString(), grr[ii].Font);
-                        lname.Width = (int)size.Width + 10;
-                        lname.Text = "Name: " + reader[2].ToString() + " " + reader[3].ToString() + " " + reader[4].ToString();
-
-                        if (reader[14].ToString().Equals("Student"))
-                        {
-                            Label course = new Label();
-                            course.Name = "course" + (ii + 1);
-                            grr[ii].Controls.Add(course);
-                            course.Location = new Point(215, 21);
-                            course.Text = reader[5].ToString() + " - " + reader[6].ToString();
-                        }
-
-                        Label barcode = new Label();
-                        barcode.Name = "barcode" + (ii + 1);
-                        grr[ii].Controls.Add(barcode);
-                        barcode.Location = new Point(15, 41);
-                        size = g.MeasureString("Barcode: " + reader[8].ToString(), grr[ii].Font);
-                        barcode.Width = (int)size.Width + 10;
-                        barcode.Text = "Barcode: " + reader[8].ToString();
-                        barcode.BringToFront();
-
-                        Label accessNum = new Label();
-                        accessNum.Name = "accessNum" + (ii + 1);
-                        grr[ii].Controls.Add(accessNum);
-                        accessNum.Location = new Point(15, 61);
-                        size = g.MeasureString("Accession Number: " + reader[9].ToString(), grr[ii].Font);
-                        accessNum.Width = (int)size.Width + 10;
-                        accessNum.Text = "Accession Number: " + reader[9].ToString();
-                        accessNum.BringToFront();
-
-                        Label callNum = new Label();
-                        callNum.Name = "callNum" + (ii + 1);
-                        grr[ii].Controls.Add(callNum);
-                        callNum.Location = new Point(15, 81);
-                        size = g.MeasureString("Call Number: " + reader[10].ToString(), grr[ii].Font);
-                        callNum.Width = (int)size.Width + 10;
-                        callNum.Text = "Call Number: " + reader[10].ToString();
-                        callNum.BringToFront();
-
-                        Label lender = new Label();
-                        lender.Name = "lender" + (ii + 1);
-                        grr[ii].Controls.Add(lender);
-                        lender.Location = new Point(215, 41);
-                        lender.Font = new Font("Segoe UI", 8F);
-                        lender.Text = "Lender: " + reader[11].ToString();
-                        size = g.MeasureString(lender.Text, lender.Font);
-                        lender.Width = (int)size.Width + 10;
-                        lender.BringToFront();
-
-                        Label date = new Label();
-                        date.Name = "date" + (ii + 1);
-                        grr[ii].Controls.Add(date);
-                        date.Location = new Point(215, 61);
-                        size = g.MeasureString("Date Borrowed: " + reader[1].ToString(), grr[ii].Font);
-                        date.Width = (int)size.Width + 10;
-                        date.Text = "Date Borrowed: " + reader[1].ToString();
-                        date.BringToFront();
-
-                        if (reader[14].ToString().Equals("Student"))
-                        {
-                            Label returnBy = new Label();
-                            returnBy.Name = "returnBy" + (ii + 1);
-                            grr[ii].Controls.Add(returnBy);
-                            returnBy.Location = new Point(215, 81);
-                            size = g.MeasureString("Return On or Before: " + reader[12].ToString(), grr[ii].Font);
-                            returnBy.Width = (int)size.Width + 10;
-                            returnBy.Text = "Return On or Before: " + reader[12].ToString();
-                            returnBy.BringToFront();
-                        }
-
-                        Label status = new Label();
-                        status.Name = "status" + (ii + 1);
-                        grr[ii].Controls.Add(status);
-                        status.Location = new Point(15, 101);
-                        size = g.MeasureString("Status: " + reader[13].ToString(), grr[ii].Font);
-                        status.Width = (int)size.Width + 10;
-                        status.Text = "Status: " + reader[13].ToString();
-                        status.BringToFront();
-                        mainP.Invalidate();
-
-                        if (reader[14].ToString().Equals("Student"))
-                        {
-                            DateTime returnDate = DateTime.Parse(reader[12].ToString());
-                            if (DateTime.Now > returnDate)
-                            {
-                                TimeSpan overdue = DateTime.Now - returnDate;
-                                int days = ((int)overdue.TotalMinutes / 60) / 24 + 1;
-                                fineAmount = days * 10;
-                            }
-
-                            Label fine = new Label();
-                            fine.Name = "fine" + (ii + 1);
-                            grr[ii].Controls.Add(fine);
-                            fine.Location = new Point(215, 101);
-                            fine.Width = 100;
-                            fine.Text = "Fine: " + fineAmount.ToString() + " PESOS";
-                            fine.BringToFront();
-                        }
-                        ii++;
-                        lender.BringToFront();
-                        mainP.Invalidate();
+                        Singleton.grr[ii].Location = new Point(0, Singleton.grr[ii - 1].Bottom);
                     }
+                    Singleton.grr[ii].Text = reader[7].ToString();
+                    Singleton.grr[ii].Font = new Font("Segoe UI", 8F);
+
+                    Graphics g = CreateGraphics();
+
+                    Label borrowID = new Label();
+                    borrowID.Name = "borrowID" + (int.Parse(reader[0].ToString()));
+                    Singleton.grr[ii].Controls.Add(borrowID);
+                    borrowID.Location = new Point(385, 21);
+                    borrowID.Width = 90;
+                    borrowID.Text = "BorrowID: " + int.Parse(reader[0].ToString());
+
+                    Button returnB = new Button();
+                    returnB.Name = "returnB-" + (int.Parse(reader[0].ToString()));
+                    Singleton.grr[ii].Controls.Add(returnB);
+                    returnB.BackColor = Color.White;
+                    returnB.ForeColor = Color.Black;
+                    returnB.SetBounds(385, 36, 65, 30);
+                    returnB.Text = "Return";
+                    returnB.BringToFront();
+                    returnB.Click += new EventHandler(returnButton_click);
+
+
+                    Label lname = new Label();
+                    lname.Name = "lname" + (ii + 1);
+                    Singleton.grr[ii].Controls.Add(lname);
+                    lname.Location = new Point(15, 21);
+                    SizeF size = g.MeasureString("Name: " + reader[2].ToString() + " " + reader[3].ToString() + " " + reader[4].ToString(), Singleton.grr[ii].Font);
+                    lname.Width = (int)size.Width + 10;
+                    lname.Text = "Name: " + reader[2].ToString() + " " + reader[3].ToString() + " " + reader[4].ToString();
+
+                    if (reader[14].ToString().Equals("Student"))
+                    {
+                        Label course = new Label();
+                        course.Name = "course" + (ii + 1);
+                        Singleton.grr[ii].Controls.Add(course);
+                        course.Location = new Point(215, 21);
+                        course.Text = reader[5].ToString() + " - " + reader[6].ToString();
+                    }
+
+                    Label barcode = new Label();
+                    barcode.Name = "barcode" + (ii + 1);
+                    Singleton.grr[ii].Controls.Add(barcode);
+                    barcode.Location = new Point(15, 41);
+                    size = g.MeasureString("Barcode: " + reader[8].ToString(), Singleton.grr[ii].Font);
+                    barcode.Width = (int)size.Width + 10;
+                    barcode.Text = "Barcode: " + reader[8].ToString();
+                    barcode.BringToFront();
+
+                    Label accessNum = new Label();
+                    accessNum.Name = "accessNum" + (ii + 1);
+                    Singleton.grr[ii].Controls.Add(accessNum);
+                    accessNum.Location = new Point(15, 61);
+                    size = g.MeasureString("Accession Number: " + reader[9].ToString(), Singleton.grr[ii].Font);
+                    accessNum.Width = (int)size.Width + 10;
+                    accessNum.Text = "Accession Number: " + reader[9].ToString();
+                    accessNum.BringToFront();
+
+                    Label callNum = new Label();
+                    callNum.Name = "callNum" + (ii + 1);
+                    Singleton.grr[ii].Controls.Add(callNum);
+                    callNum.Location = new Point(15, 81);
+                    size = g.MeasureString("Call Number: " + reader[10].ToString(), Singleton.grr[ii].Font);
+                    callNum.Width = (int)size.Width + 10;
+                    callNum.Text = "Call Number: " + reader[10].ToString();
+                    callNum.BringToFront();
+
+                    Label lender = new Label();
+                    lender.Name = "lender" + (ii + 1);
+                    Singleton.grr[ii].Controls.Add(lender);
+                    lender.Location = new Point(215, 41);
+                    lender.Font = new Font("Segoe UI", 8F);
+                    lender.Text = "Lender: " + reader[11].ToString();
+                    size = g.MeasureString(lender.Text, lender.Font);
+                    lender.Width = (int)size.Width + 10;
+                    lender.BringToFront();
+
+                    Label date = new Label();
+                    date.Name = "date" + (ii + 1);
+                    Singleton.grr[ii].Controls.Add(date);
+                    date.Location = new Point(215, 61);
+                    size = g.MeasureString("Date Borrowed: " + reader[1].ToString(), Singleton.grr[ii].Font);
+                    date.Width = (int)size.Width + 10;
+                    date.Text = "Date Borrowed: " + reader[1].ToString();
+                    date.BringToFront();
+
+                    if (reader[14].ToString().Equals("Student"))
+                    {
+                        Label returnBy = new Label();
+                        returnBy.Name = "returnBy" + (ii + 1);
+                        Singleton.grr[ii].Controls.Add(returnBy);
+                        returnBy.Location = new Point(215, 81);
+                        size = g.MeasureString("Return On or Before: " + reader[12].ToString(), Singleton.grr[ii].Font);
+                        returnBy.Width = (int)size.Width + 10;
+                        returnBy.Text = "Return On or Before: " + reader[12].ToString();
+                        returnBy.BringToFront();
+                    }
+
+                    Label status = new Label();
+                    status.Name = "status" + (ii + 1);
+                    Singleton.grr[ii].Controls.Add(status);
+                    status.Location = new Point(15, 101);
+                    size = g.MeasureString("Status: " + reader[13].ToString(), Singleton.grr[ii].Font);
+                    status.Width = (int)size.Width + 10;
+                    status.Text = "Status: " + reader[13].ToString();
+                    status.BringToFront();
+                    mainP.Invalidate();
+
+                    if (reader[14].ToString().Equals("Student"))
+                    {
+                        DateTime returnDate = DateTime.Parse(reader[12].ToString());
+                        if (DateTime.Now > returnDate)
+                        {
+                            TimeSpan overdue = DateTime.Now - returnDate;
+                            int days = ((int)overdue.TotalMinutes / 60) / 24 + 1;
+                            Singleton.fineAmount = days * 10;
+                        }
+
+                        Label fine = new Label();
+                        fine.Name = "fine" + (ii + 1);
+                        Singleton.grr[ii].Controls.Add(fine);
+                        fine.Location = new Point(215, 101);
+                        fine.Width = 100;
+                        fine.Text = "Fine: " + Singleton.fineAmount.ToString() + " PESOS";
+                        fine.BringToFront();
+                    }
+                    ii++;
+                    lender.BringToFront();
+                    mainP.Invalidate();
                 }
             }
+            if (!connOpen) Connection.CloseConnection();
             int x = 0;
         }
         private void returnButton_click(Object sender, EventArgs e)
@@ -252,23 +234,21 @@ namespace libraryForm
             string[] num = button.Name.Split('-');
             PasswordPrompt pass = new PasswordPrompt();
             pass.ShowDialog();
-            if (parent.password == pass.pw)
+            if (Singleton.parent.password == pass.pw)
             {
-                using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+                Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("UPDATE borrowedBooks SET Status = 'Returned' WHERE borrowNumber =" + int.Parse(num[1]), Connection.conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE borrowedBooks SET Status = 'Returned' WHERE borrowNumber =" + int.Parse(num[1]), conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Book returned!");
-                        BorrowRefresh();
-                    }
-                    using (SqlCommand cmd = new SqlCommand("UPDATE borrowedBooks SET FineAccumulated = " + fineAmount + " WHERE borrowNumber =" + int.Parse(num[1]), conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    fineAmount = 0;
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Book returned!");
+                    BorrowRefresh();
                 }
+                using (SqlCommand cmd = new SqlCommand("UPDATE borrowedBooks SET FineAccumulated = " + Singleton.fineAmount + " WHERE borrowNumber =" + int.Parse(num[1]), Connection.conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                Singleton.fineAmount = 0;
+                Connection.CloseConnection();
             }
             else
                 MessageBox.Show("Incorrect Password!");
@@ -276,74 +256,70 @@ namespace libraryForm
         }
         private void RefreshDailyBookStats(string day)
         {
-            using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+            bool connOpen;
+            connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+            if (!connOpen) Connection.OpenConnection();
+            int i = 2;
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM dailyBookStats WHERE Date = '" + day + "'", Connection.conn))
             {
-              
-                int i = 2;
-
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM dailyBookStats WHERE Date = '" + day + "'", conn))
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                foreach (Label lab in booksPanel.Controls.OfType<Label>().OrderBy(d => d.TabIndex))
                 {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    reader.Read();
-                    foreach (Label lab in booksPanel.Controls.OfType<Label>().OrderBy(d => d.TabIndex))
-                    {
-                        if (i == booksLim)
-                            break;
-                        lab.Text = reader[i].ToString();
-                        i++;
-                    }
-                    reader.Close();
+                    if (i == Singleton.booksLim)
+                        break;
+                    lab.Text = reader[i].ToString();
+                    i++;
                 }
+                reader.Close();
             }
+            if (!connOpen) Connection.CloseConnection();
         }
         private void RefreshWeeklyBookStats(string week)
         {
-            using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+            bool connOpen;
+            connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+            if (!connOpen) Connection.OpenConnection();
+            int i = 2;
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM weeklyBookStats WHERE weekLength = '" + week + "'", Connection.conn))
             {
-                int i = 2;
-
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM weeklyBookStats WHERE weekLength = '" + week + "'", conn))
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                foreach (Label lab in booksPanel.Controls.OfType<Label>().OrderBy(d => d.TabIndex))
                 {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    reader.Read();
-                    foreach (Label lab in booksPanel.Controls.OfType<Label>().OrderBy(d => d.TabIndex))
-                    {
-                        if (i == booksLim)
-                            break;
-                        lab.Text = reader[i].ToString();
-                        i++;
-                    }
-                    reader.Close();
+                    if (i == Singleton.booksLim)
+                        break;
+                    lab.Text = reader[i].ToString();
+                    i++;
                 }
+                reader.Close();
             }
+            if (!connOpen) Connection.CloseConnection();
         }
         private void RefreshMonthlyBookStats(string month)
         {
-            using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+            bool connOpen;
+            connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+            if (!connOpen) Connection.OpenConnection();
+            int i = 2;
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM monthlyBookStats WHERE monthYear = '" + month + "'", Connection.conn))
             {
-                int i = 2;
-
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM monthlyBookStats WHERE monthYear = '" + month + "'", conn))
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                foreach (Label lab in booksPanel.Controls.OfType<Label>().OrderBy(d => d.TabIndex))
                 {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    reader.Read();
-                    foreach (Label lab in booksPanel.Controls.OfType<Label>().OrderBy(d => d.TabIndex))
-                    {
-                        if (i == booksLim)
-                            break;
-                        lab.Text = reader[i].ToString();
-                        i++;
-                    }
-                    reader.Close();
+                    if (i == Singleton.booksLim)
+                        break;
+                    lab.Text = reader[i].ToString();
+                    i++;
                 }
+                reader.Close();
             }
+            if (!connOpen) Connection.CloseConnection();
         }
         private void borrowBookBtn_Click(object sender, EventArgs e)
         {
-            if (borrower.Equals("Student"))
+            if (Singleton.borrower.Equals("Student"))
             {
                 if (!string.IsNullOrWhiteSpace(borrowLName.Text) &&
                     !string.IsNullOrWhiteSpace(borrowFName.Text) &&
@@ -354,7 +330,7 @@ namespace libraryForm
                     !string.IsNullOrWhiteSpace(borrowBar.Text) &&
                     !string.IsNullOrWhiteSpace(borrowAccess.Text) &&
                     !string.IsNullOrWhiteSpace(borrowCall.Text) &&
-                    studRad && bookRadCheck)
+                    Singleton.studRad && Singleton.bookRadCheck)
                 {
                     string date = DateTime.Now.ToString("dd-MM-yyyy");
                     DateTime returnTime = new DateTime();
@@ -366,10 +342,8 @@ namespace libraryForm
                         returnTime = DateTime.Now.AddDays(7);
 
                     string returnBy = returnTime.ToString("dd MMM yyyy") + " 12:00:00 PM";
-                    using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
-                    {
-                        conn.Open();
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO borrowedBooks (Date, " +
+                    Connection.OpenConnection();
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO borrowedBooks (Date, " +
                                                                                           "lName, " +
                                                                                           "fName, " +
                                                                                           "mName, " +
@@ -394,20 +368,20 @@ namespace libraryForm
                                                                                           "'" + borrowBar.Text + "'," +
                                                                                           "'" + borrowAccess.Text + "'," +
                                                                                           "'" + borrowCall.Text + "'," +
-                                                                                          "'" + parent.name + "'," +
+                                                                                          "'" + Singleton.parent.name + "'," +
                                                                                           "'" + returnBy + "'," +
                                                                                           "'Borrowed'," +
-                                                                                          "'" + borrower + "'," +
-                                                                                          "'" + DateTime.Now.ToString() + "')", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        MessageBox.Show("Book borrow successful!");
-                        BorrowRefresh();
+                                                                                          "'" +Singleton.borrower + "'," +
+                                                                                          "'" + DateTime.Now.ToString() + "')", Connection.conn))
+                    {
+                        cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Book borrow successful!");
+                    BorrowRefresh();
+                    Connection.CloseConnection();
                 }
             }
-            else if (borrower.Equals("Faculty"))
+            else if (Singleton.borrower.Equals("Faculty"))
             {
                 if (!string.IsNullOrWhiteSpace(borrowLName.Text) &&
                     !string.IsNullOrWhiteSpace(borrowFName.Text) &&
@@ -416,7 +390,7 @@ namespace libraryForm
                     !string.IsNullOrWhiteSpace(borrowBar.Text) &&
                     !string.IsNullOrWhiteSpace(borrowAccess.Text) &&
                     !string.IsNullOrWhiteSpace(borrowCall.Text) &&
-                    studRad && bookRadCheck)
+                    Singleton.studRad && Singleton.bookRadCheck)
                 {
                     string date = DateTime.Now.ToString("dd-MM-yyyy");
                     DateTime returnTime = new DateTime();
@@ -428,10 +402,8 @@ namespace libraryForm
                         returnTime = DateTime.Now.AddDays(7);
 
                     string returnBy = returnTime.ToString("dd MMM yyyy") + " 10:00:00 AM";
-                    using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
-                    {
-                        conn.Open();
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO borrowedBooks (Date, " +
+                    Connection.OpenConnection();
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO borrowedBooks (Date, " +
                                                                                           "lName, " +
                                                                                           "fName, " +
                                                                                           "mName, " +
@@ -452,17 +424,17 @@ namespace libraryForm
                                                                                           "'" + borrowBar.Text + "'," +
                                                                                           "'" + borrowAccess.Text + "'," +
                                                                                           "'" + borrowCall.Text + "'," +
-                                                                                          "'" + parent.name + "'," +
+                                                                                          "'" + Singleton.parent.name + "'," +
                                                                                           "'" + returnBy + "'," +
                                                                                           "'Borrowed'," +
-                                                                                          "'" + borrower + "'," +
-                                                                                          "'" + DateTime.Now.ToString() + "')", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        MessageBox.Show("Book borrow successful!");
-                        BorrowRefresh();
+                                                                                          "'" +Singleton.borrower + "'," +
+                                                                                          "'" + DateTime.Now.ToString() + "')", Connection.conn))
+                    {
+                        cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Book borrow successful!");
+                    BorrowRefresh();
+                    Connection.CloseConnection();
                 }
             }
         }
@@ -471,16 +443,16 @@ namespace libraryForm
         {
             if (studentRad.Checked)
             {
-                borrower = "Student";
-                studRad = true;
+               Singleton.borrower = "Student";
+                Singleton.studRad = true;
                 borrowFName.Enabled = true;
                 borrowLName.Enabled = true;
                 borrowMName.Enabled = true;
                 borrowCourseCom.Enabled = true;
                 int i2 = 0;
-                while (i2 < courseLim - 2)
+                while (i2 < Singleton.courseLim - 2)
                 {
-                    borrowCourseCom.Items.Add(course[i2]);
+                    borrowCourseCom.Items.Add(Singleton.course[i2]);
                     i2++;
                 }
                 borrowYearSec.Enabled = true;
@@ -498,8 +470,8 @@ namespace libraryForm
         {
             if (facultyRad.Checked)
             {
-                borrower = "Faculty";
-                studRad = true;
+               Singleton.borrower = "Faculty";
+                Singleton.studRad = true;
                 borrowFName.Enabled = true;
                 borrowLName.Enabled = true;
                 borrowMName.Enabled = true;
@@ -520,7 +492,7 @@ namespace libraryForm
         {
             if (bookRad.Checked)
             {
-                bookRadCheck = true;
+                Singleton.bookRadCheck = true;
             }
         }
 
@@ -528,7 +500,7 @@ namespace libraryForm
         {
             if (fictionRad.Checked)
             {
-                bookRadCheck = true;
+                Singleton.bookRadCheck = true;
             }
         }
         Label bookStats;
@@ -536,45 +508,45 @@ namespace libraryForm
         {
             if (booksDatesRad.Checked)
             {
-                using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+                bool connOpen;
+                connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+                if (!connOpen) Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("SELECT " + category + " FROM dailyBookStats WHERE Date = '" + dailyBooksCom1.Text + "'", Connection.conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT " + category + " FROM dailyBookStats WHERE Date = '" + dailyBooksCom1.Text + "'", conn))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        reader.Read();
-                        bookStats = booksPanel.Controls.Find(category + "lab", true).FirstOrDefault() as Label;
-                        bookStats.Text = reader[0].ToString();
-                    }
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    reader.Read();
+                    bookStats = booksPanel.Controls.Find(category + "lab", true).FirstOrDefault() as Label;
+                    bookStats.Text = reader[0].ToString();
                 }
+                if (!connOpen) Connection.CloseConnection();
             }
             else if (booksWeeksRad.Checked)
             {
-                using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+                bool connOpen;
+                connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+                if (!connOpen) Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("SELECT " + category + " FROM weeklyBookStats WHERE weekLength = '" + dailyBooksCom1.Text + "'", Connection.conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT " + category + " FROM weeklyBookStats WHERE weekLength = '" + dailyBooksCom1.Text + "'", conn))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        reader.Read();
-                        bookStats = booksPanel.Controls.Find(category + "lab", true).FirstOrDefault() as Label;
-                        bookStats.Text = reader[0].ToString();
-                    }
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    reader.Read();
+                    bookStats = booksPanel.Controls.Find(category + "lab", true).FirstOrDefault() as Label;
+                    bookStats.Text = reader[0].ToString();
                 }
+                if (!connOpen) Connection.CloseConnection();
             }
             else if (booksMonthsRad.Checked)
             {
-                using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+                bool connOpen;
+                connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+                if (!connOpen) Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("SELECT " + category + " FROM monthlyBookStats WHERE monthYear = = '" + dailyBooksCom1.Text + "'", Connection.conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT " + category + " FROM monthlyBookStats WHERE monthYear = = '" + dailyBooksCom1.Text + "'", conn))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        reader.Read();
-                        bookStats = booksPanel.Controls.Find(category + "lab", true).FirstOrDefault() as Label;
-                        bookStats.Text = reader[0].ToString();
-                    }
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    reader.Read();
+                    bookStats = booksPanel.Controls.Find(category + "lab", true).FirstOrDefault() as Label;
+                    bookStats.Text = reader[0].ToString();
                 }
+                if (!connOpen) Connection.CloseConnection();
             }
 
         }
@@ -584,51 +556,51 @@ namespace libraryForm
             string monthNow, yearNow;
             string[] monthYear;
             string[] weekLength;
-            using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+            bool connOpen;
+            connOpen = Connection.conn.State == ConnectionState.Closed ? false : true;
+            if (!connOpen) Connection.OpenConnection();
+            using (SqlCommand cmd = new SqlCommand("SELECT dayEnd FROM dailyBookStats WHERE Date = '" + dailyBooksCom1.Text + "'", Connection.conn))
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT dayEnd FROM dailyBookStats WHERE Date = '" + dailyBooksCom1.Text + "'", conn))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    reader.Read();
-                    dateSelected = DateTime.Parse(reader[0].ToString());
-                    monthNow = dateSelected.ToString("MMMM");
-                    yearNow = dateSelected.ToString("yyyy");
-                    reader.Close();
-                }
-                using (SqlCommand cmd = new SqlCommand("SELECT weekLength FROM weeklyBookStats", conn))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        weekLength = reader[0].ToString().Split('-');
-                        weekLength[0] = weekLength[0].Trim() + " 12:00:00 AM";
-                        weekLength[1] = weekLength[1].Trim() + " 11:59:59 PM";
-                        weekStart = DateTime.Parse(weekLength[0]);
-                        weekEnd = DateTime.Parse(weekLength[1]);
-                        if (dateSelected >= weekStart && dateSelected <= weekEnd)
-                        {
-                            weekNow = reader[0].ToString();
-                            break;
-                        }
-                    }
-                    reader.Close();
-                }
-                using (SqlCommand cmd = new SqlCommand("SELECT monthYear FROM monthlyBookStats", conn))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        monthYear = reader[0].ToString().Split('-');
-                        if (monthNow.Equals(monthYear[0]) && yearNow.Equals(monthYear[1]))
-                        {
-                            monthYearNow = reader[0].ToString();
-                            break;
-                        }
-                    }
-                    reader.Close();
-                }
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                dateSelected = DateTime.Parse(reader[0].ToString());
+                monthNow = dateSelected.ToString("MMMM");
+                yearNow = dateSelected.ToString("yyyy");
+                reader.Close();
             }
+            using (SqlCommand cmd = new SqlCommand("SELECT weekLength FROM weeklyBookStats", Connection.conn))
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    weekLength = reader[0].ToString().Split('-');
+                    weekLength[0] = weekLength[0].Trim() + " 12:00:00 AM";
+                    weekLength[1] = weekLength[1].Trim() + " 11:59:59 PM";
+                    weekStart = DateTime.Parse(weekLength[0]);
+                    weekEnd = DateTime.Parse(weekLength[1]);
+                    if (dateSelected >= weekStart && dateSelected <= weekEnd)
+                    {
+                        Singleton.weekNow = reader[0].ToString();
+                        break;
+                    }
+                }
+                reader.Close();
+            }
+            using (SqlCommand cmd = new SqlCommand("SELECT monthYear FROM monthlyBookStats", Connection.conn))
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    monthYear = reader[0].ToString().Split('-');
+                    if (monthNow.Equals(monthYear[0]) && yearNow.Equals(monthYear[1]))
+                    {
+                        Singleton.monthYearNow = reader[0].ToString();
+                        break;
+                    }
+                }
+                reader.Close();
+            }
+            if (!connOpen) Connection.CloseConnection();
         }
         private void Abtn_Click(object sender, EventArgs e)
         {
@@ -638,8 +610,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -659,8 +631,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -680,8 +652,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -701,8 +673,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -722,8 +694,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -743,8 +715,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -764,8 +736,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -785,8 +757,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -806,8 +778,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -827,8 +799,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -848,8 +820,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -869,8 +841,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -890,8 +862,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -911,8 +883,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -932,8 +904,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -953,8 +925,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -974,8 +946,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -995,8 +967,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -1016,8 +988,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -1037,8 +1009,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -1058,8 +1030,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
@@ -1075,20 +1047,18 @@ namespace libraryForm
         {
             if (booksDatesRad.Checked)
             {
-                using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
+                Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("SELECT date FROM [dailyStats] ORDER BY dayNumber DESC", Connection.conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT date FROM [dailyStats] ORDER BY dayNumber DESC", conn))
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            dailyBooksCom1.Items.Add(reader[0].ToString());
-                        }
-                        dailyBooksCom1.SelectedIndex = 0;
-                        reader.Close();
+                        dailyBooksCom1.Items.Add(reader[0].ToString());
                     }
+                    reader.Close();
+                    dailyBooksCom1.SelectedIndex = 0;
                 }
+                Connection.CloseConnection();
             }
         }
 
@@ -1096,40 +1066,35 @@ namespace libraryForm
         {
             if (booksWeeksRad.Checked)
             {
-                using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
-                {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT weekLength FROM [weeklyStats] ORDER BY weekNumber DESC", conn))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            dailyBooksCom1.Items.Add(reader[0].ToString());
-                        }
-                        dailyBooksCom1.SelectedIndex = 0;
-                        reader.Close();
-                    }
-                }
-            }
-        }
-
-        private void booksMonthsRad_CheckedChanged(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection("server=(local)\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=true;"))
-            {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT monthYear FROM [monthlyStats] ORDER BY monthNumber DESC", conn))
+                Connection.OpenConnection();
+                using (SqlCommand cmd = new SqlCommand("SELECT weekLength FROM [weeklyStats] ORDER BY weekNumber DESC", Connection.conn))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         dailyBooksCom1.Items.Add(reader[0].ToString());
                     }
-                    dailyBooksCom1.SelectedIndex = 0;
                     reader.Close();
+                    dailyBooksCom1.SelectedIndex = 0;
                 }
+                Connection.CloseConnection();
             }
+        }
 
+        private void booksMonthsRad_CheckedChanged(object sender, EventArgs e)
+        {
+            Connection.OpenConnection();
+            using (SqlCommand cmd = new SqlCommand("SELECT monthYear FROM [monthlyStats] ORDER BY monthNumber DESC", Connection.conn))
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dailyBooksCom1.Items.Add(reader[0].ToString());
+                }
+                reader.Close();
+                dailyBooksCom1.SelectedIndex = 0;
+            }
+            Connection.CloseConnection();
         }
 
         private void datesBtn_Click(object sender, EventArgs e)
@@ -1178,8 +1143,8 @@ namespace libraryForm
             {
                 GetWeekMonth();
                 books.dateSelected = dailyBooksCom1.Text;
-                books.weekSelected = weekNow;
-                books.monthSelected = monthYearNow;
+                books.weekSelected = Singleton.weekNow;
+                books.monthSelected = Singleton.monthYearNow;
                 books.today = false;
                 books.ShowDialog();
             }
