@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +11,13 @@ namespace libraryForm
     {
         public static SqlConnection conn = null;
 
-        public void OpenConnection()
+        public static void OpenConnection()
         {
-            conn = new SqlConnection("Data Source=(LocalDb)\\LocalDB;Initial Catalog=master;Integrated Security=True");
+            conn = new SqlConnection("Data Source=(Local)\\SQLEXPRESS;Initial Catalog=Library;Integrated Security=True");
             conn.Open();
         }
 
-        public void CloseConnection()
+        public static void CloseConnection()
         {
             conn.Close();
         }
