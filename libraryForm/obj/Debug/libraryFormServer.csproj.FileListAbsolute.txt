@@ -67,3 +67,32 @@ C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\
 C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.exe.manifest
 C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\obj\Debug\Library Users.application
 C:\Users\Clark Dave\Desktop\Projects\CSharp\libraryForm\libraryForm\libraryForm\bin\Debug\Database1.sdf
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\Library Users.exe
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\Library Users.pdb
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\bin\Debug\Database1.sdf
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\bin\Debug\bin\Debug\Database1.sdf
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\bin\Debug\Library Users.exe.manifest
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\bin\Debug\Library Users.application
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\bin\Debug\Library Users.exe
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\bin\Debug\Library Users.pdb
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryFormServer.csprojResolveAssemblyReference.cache
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.Add_Students.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.Edit_Students.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.Form10.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.Form1.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.AddUsers.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.EditUsers.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.InputBookStats.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.Login.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.Others.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.PasswordPrompt.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.Properties.Resources.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.visitsLog.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryFormServer.csproj.GenerateResource.Cache
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\Library Users.TrustInfo.xml
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\Library Users.exe.manifest
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\Library Users.application
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.CL_MainWindow.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.UserInfoTab.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.SelectCourse.resources
+C:\Users\Clark Dave\Desktop\Projects\CSharp\softeng\libraryForm\obj\Debug\libraryForm.LogTab.resources
