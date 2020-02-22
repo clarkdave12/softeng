@@ -99,11 +99,27 @@
     <Compile Include="Add_Students.designer.cs">
       <DependentUpon>Add_Students.cs</DependentUpon>
     </Compile>
+    <Compile Include="BooksTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BooksTab.Designer.cs">
+      <DependentUpon>BooksTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CL_MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CL_MainWindow.Designer.cs">
+      <DependentUpon>CL_MainWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogsController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Course.cs" />
     <Compile Include="Edit_Students.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +131,13 @@
     </Compile>
     <Compile Include="Form1.designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs" />
+    <Compile Include="LogTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogTab.Designer.cs">
+      <DependentUpon>LogTab.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -140,7 +163,27 @@
     <Compile Include="InputBookStats.Designer.cs">
       <DependentUpon>InputBookStats.cs</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="SelectCourse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectCourse.Designer.cs">
+      <DependentUpon>SelectCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Singleton.cs" />
+    <Compile Include="Student.cs" />
+    <Compile Include="UserInfoTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInfoTab.Designer.cs">
+      <DependentUpon>UserInfoTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Validations\AddStudentValidations.cs" />
     <Compile Include="Validations\LoginValidation.cs" />
+    <Compile Include="Validations\LogsValidation.cs" />
+    <Compile Include="Validations\UpdateStudentValidation.cs" />
     <Compile Include="Views\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,11 +213,17 @@
     <EmbeddedResource Include="Add_Students.resx">
       <DependentUpon>Add_Students.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CL_MainWindow.resx">
+      <DependentUpon>CL_MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Edit_Students.resx">
       <DependentUpon>Edit_Students.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogTab.resx">
+      <DependentUpon>LogTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -187,6 +236,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InputBookStats.resx">
       <DependentUpon>InputBookStats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Release\libraryForm.AddUsers.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.Add_Students.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.EditUsers.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.Edit_Students.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.Form1.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.Form10.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.InputBookStats.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.Login.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.Others.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.PasswordPrompt.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.Properties.Resources.resources" />
+    <EmbeddedResource Include="obj\Release\libraryForm.visitsLog.resources" />
+    <EmbeddedResource Include="SelectCourse.resx">
+      <DependentUpon>SelectCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInfoTab.resx">
+      <DependentUpon>UserInfoTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -209,8 +276,45 @@
     <EmbeddedResource Include="visitsLog.resx">
       <DependentUpon>visitsLog.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\Debug\Library Users.application" />
+    <None Include="bin\Debug\Library Users.exe.manifest" />
+    <None Include="bin\Debug\Library Users.vshost.application" />
+    <None Include="bin\Debug\Library Users.vshost.exe.manifest" />
+    <None Include="bin\Debug\normidna.nlp" />
+    <None Include="bin\Debug\normnfc.nlp" />
+    <None Include="bin\Debug\normnfd.nlp" />
+    <None Include="bin\Debug\normnfkc.nlp" />
+    <None Include="bin\Debug\normnfkd.nlp" />
+    <None Include="bin\Release\app.publish\Application Files\Library Users_1_0_0_17\Library Users.exe.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\Library Users_1_0_0_17\Library Users.exe.manifest" />
+    <None Include="bin\Release\app.publish\Application Files\Library Users_1_0_0_17\MetroFramework.Design.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\Library Users_1_0_0_17\MetroFramework.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\Library Users_1_0_0_17\MetroFramework.Fonts.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\Library Users_1_0_0_17\MetroFramework.txt.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\Library Users_1_0_0_17\sarmiento %281%29.ico.deploy" />
+    <None Include="bin\Release\app.publish\Library Users.application" />
+    <None Include="bin\Release\Library Users.application" />
+    <None Include="bin\Release\Library Users.exe.manifest" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="libraryFormServer_TemporaryKey.pfx" />
+    <None Include="MetroFramework.1.2.0.3.nupkg" />
+    <None Include="MetroFramework.Design.1.2.0.3.nupkg" />
+    <None Include="MetroFramework.Fonts.1.2.0.3.nupkg" />
+    <None Include="MetroFramework.RunTime.1.2.0.3.nupkg" />
+    <None Include="metromodernui.1.4.0.nupkg" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\Library Users.application" />
+    <None Include="obj\Release\Library Users.exe.manifest" />
+    <None Include="obj\Release\libraryFormServer.csproj.CopyComplete" />
+    <None Include="obj\Release\libraryFormServer.csproj.GenerateResource.cache" />
+    <None Include="obj\Release\libraryFormServer.csprojAssemblyReference.cache" />
     <None Include="packages.config" />
+    <None Include="packages\MetroFramework.1.2.0.3.nupkg" />
+    <None Include="packages\MetroFramework.Design.1.2.0.3.nupkg" />
+    <None Include="packages\MetroFramework.Fonts.1.2.0.3.nupkg" />
+    <None Include="packages\MetroFramework.RunTime.1.2.0.3.nupkg" />
+    <None Include="packages\metromodernui.1.4.0.nupkg" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -222,10 +326,40 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Database1.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bin\Debug\Library Users.exe" />
+    <Content Include="bin\Debug\Library Users.pdb" />
+    <Content Include="bin\Debug\Library Users.vshost.exe" />
+    <Content Include="bin\Debug\MetroFramework.Design.dll" />
+    <Content Include="bin\Debug\MetroFramework.dll" />
+    <Content Include="bin\Debug\MetroFramework.Fonts.dll" />
+    <Content Include="bin\Debug\mscorlib.dll" />
+    <Content Include="bin\Debug\System.Net.Http.dll" />
+    <Content Include="bin\Debug\System.Net.Http.xml" />
+    <Content Include="bin\Release\app.publish\Library Users.exe" />
+    <Content Include="bin\Release\app.publish\setup.exe" />
+    <Content Include="bin\Release\Library Users.exe" />
+    <Content Include="bin\Release\Library Users.pdb" />
+    <Content Include="bin\Release\MetroFramework.Design.dll" />
+    <Content Include="bin\Release\MetroFramework.dll" />
+    <Content Include="bin\Release\MetroFramework.Fonts.dll" />
     <Content Include="Database1.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libraryForm.csproj" />
     <Content Include="MetroFramework.txt" />
+    <Content Include="obj\Release\Library Users.exe" />
+    <Content Include="obj\Release\Library Users.pdb" />
+    <Content Include="obj\Release\Library Users.TrustInfo.xml" />
+    <Content Include="obj\Release\libraryFormServer.csproj.FileListAbsolute.txt" />
+    <Content Include="packages\MetroFramework.Design.1.2.0.3\lib\net40\MetroFramework.Design.dll" />
+    <Content Include="packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll" />
+    <Content Include="packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll" />
+    <Content Include="packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll" />
+    <Content Include="packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll" />
+    <Content Include="packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll" />
     <Content Include="sarmiento %281%29.ico" />
   </ItemGroup>
   <ItemGroup>

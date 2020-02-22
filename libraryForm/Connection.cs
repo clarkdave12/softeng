@@ -11,10 +11,11 @@ namespace libraryForm
     {
         public static SqlConnection conn = null;
 
+        public static string ConnectionString = "Data Source=(LocalDb)\\LocalDB;Initial Catalog=master;Integrated Security=True";
+
         public static void OpenConnection()
         {
-            conn = new SqlConnection("Data Source=(Local)\\SQLEXPRESS;Initial Catalog=Library;Integrated Security=True");
-            conn.Open();
+            conn = new SqlConnection(ConnectionString);
         }
 
         public static void CloseConnection()

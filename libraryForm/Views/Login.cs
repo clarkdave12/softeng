@@ -127,7 +127,12 @@ namespace libraryForm
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            
+            CL_MainWindow main = new CL_MainWindow();
+            this.Hide();
+            main.Show();
+
+            //LoginController.Login();
+
         }
     }
 }

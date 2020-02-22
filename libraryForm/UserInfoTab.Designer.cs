@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInfoTab));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel31 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.courseButton = new System.Windows.Forms.Button();
+            this.coursebox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -42,37 +45,9 @@
             this.midNameBox = new MetroFramework.Controls.MetroTextBox();
             this.firstNameBox = new MetroFramework.Controls.MetroTextBox();
             this.lastNameBox = new MetroFramework.Controls.MetroTextBox();
-            this.coursePanel = new System.Windows.Forms.Panel();
-            this.ENTREPselect = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.ENGselect = new System.Windows.Forms.RadioButton();
-            this.ITselect = new System.Windows.Forms.RadioButton();
-            this.HMselect = new System.Windows.Forms.RadioButton();
-            this.FMselect = new System.Windows.Forms.RadioButton();
-            this.MMselect = new System.Windows.Forms.RadioButton();
-            this.BEselect = new System.Windows.Forms.RadioButton();
-            this.DDGTselect = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.EXTselect = new System.Windows.Forms.RadioButton();
-            this.FSMselect = new System.Windows.Forms.RadioButton();
-            this.BEEDselect = new System.Windows.Forms.RadioButton();
-            this.GBAselect = new System.Windows.Forms.RadioButton();
-            this.MATHselect = new System.Windows.Forms.RadioButton();
-            this.SCIselect = new System.Windows.Forms.RadioButton();
-            this.FILselect = new System.Windows.Forms.RadioButton();
-            this.SOCSCIselect = new System.Windows.Forms.RadioButton();
             this.editStudNo = new MetroFramework.Controls.MetroTextBox();
             this.addbtn = new MetroFramework.Controls.MetroButton();
             this.gendercom = new MetroFramework.Controls.MetroComboBox();
-            this.viewgrid = new MetroFramework.Controls.MetroGrid();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchbox = new MetroFramework.Controls.MetroTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.deleteStudbtn = new System.Windows.Forms.Button();
@@ -81,15 +56,32 @@
             this.focusHere = new System.Windows.Forms.Label();
             this.clipPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.studentsRecord = new System.Windows.Forms.DataGridView();
+            this.studentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.middleInitials = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.course = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberOfVisits = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastVisit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyStudentNoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel31.SuspendLayout();
-            this.coursePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.viewgrid)).BeginInit();
+            this.panel2.SuspendLayout();
             this.clipPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.studentsRecord)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel31
             // 
             this.panel31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(149)))), ((int)(((byte)(218)))));
+            this.panel31.Controls.Add(this.panel2);
             this.panel31.Controls.Add(this.label27);
             this.panel31.Controls.Add(this.label26);
             this.panel31.Controls.Add(this.label25);
@@ -98,25 +90,70 @@
             this.panel31.Controls.Add(this.midNameBox);
             this.panel31.Controls.Add(this.firstNameBox);
             this.panel31.Controls.Add(this.lastNameBox);
-            this.panel31.Controls.Add(this.coursePanel);
             this.panel31.Controls.Add(this.editStudNo);
             this.panel31.Controls.Add(this.addbtn);
             this.panel31.Controls.Add(this.gendercom);
             this.panel31.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel31.ForeColor = System.Drawing.Color.White;
-            this.panel31.Location = new System.Drawing.Point(758, 0);
+            this.panel31.Location = new System.Drawing.Point(1137, 0);
+            this.panel31.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel31.Name = "panel31";
-            this.panel31.Size = new System.Drawing.Size(258, 681);
+            this.panel31.Size = new System.Drawing.Size(387, 1048);
             this.panel31.TabIndex = 129;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.courseButton);
+            this.panel2.Controls.Add(this.coursebox);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Location = new System.Drawing.Point(49, 372);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(302, 90);
+            this.panel2.TabIndex = 102;
+            // 
+            // courseButton
+            // 
+            this.courseButton.AutoSize = true;
+            this.courseButton.BackColor = System.Drawing.Color.White;
+            this.courseButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.courseButton.Enabled = false;
+            this.courseButton.FlatAppearance.BorderSize = 0;
+            this.courseButton.ForeColor = System.Drawing.Color.Black;
+            this.courseButton.Location = new System.Drawing.Point(186, 37);
+            this.courseButton.Name = "courseButton";
+            this.courseButton.Size = new System.Drawing.Size(110, 30);
+            this.courseButton.TabIndex = 2;
+            this.courseButton.Text = "Select";
+            this.courseButton.UseVisualStyleBackColor = false;
+            this.courseButton.Click += new System.EventHandler(this.courseButton_Click);
+            // 
+            // coursebox
+            // 
+            this.coursebox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.coursebox.Enabled = false;
+            this.coursebox.Location = new System.Drawing.Point(3, 37);
+            this.coursebox.Name = "coursebox";
+            this.coursebox.Size = new System.Drawing.Size(177, 26);
+            this.coursebox.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Course";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(41, 29);
+            this.label27.Location = new System.Drawing.Point(62, 45);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(166, 30);
+            this.label27.Size = new System.Drawing.Size(247, 45);
             this.label27.TabIndex = 101;
             this.label27.Text = "Edit Student Info";
             // 
@@ -125,9 +162,10 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.White;
-            this.label26.Location = new System.Drawing.Point(30, 159);
+            this.label26.Location = new System.Drawing.Point(45, 245);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(57, 13);
+            this.label26.Size = new System.Drawing.Size(92, 20);
             this.label26.TabIndex = 99;
             this.label26.Text = "First Name";
             // 
@@ -136,9 +174,10 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(169, 117);
+            this.label25.Location = new System.Drawing.Point(254, 180);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(25, 13);
+            this.label25.Size = new System.Drawing.Size(35, 20);
             this.label25.TabIndex = 98;
             this.label25.Text = "M.I.";
             // 
@@ -147,9 +186,10 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(30, 117);
+            this.label23.Location = new System.Drawing.Point(45, 180);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(58, 13);
+            this.label23.Size = new System.Drawing.Size(91, 20);
             this.label23.TabIndex = 97;
             this.label23.Text = "Last Name";
             // 
@@ -158,9 +198,10 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(30, 72);
+            this.label4.Location = new System.Drawing.Point(45, 111);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.Size = new System.Drawing.Size(130, 20);
             this.label4.TabIndex = 96;
             this.label4.Text = "Student Number";
             // 
@@ -170,9 +211,10 @@
             // 
             // 
             this.midNameBox.CustomButton.Image = null;
-            this.midNameBox.CustomButton.Location = new System.Drawing.Point(27, 1);
+            this.midNameBox.CustomButton.Location = new System.Drawing.Point(40, 1);
+            this.midNameBox.CustomButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.midNameBox.CustomButton.Name = "";
-            this.midNameBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.midNameBox.CustomButton.Size = new System.Drawing.Size(33, 33);
             this.midNameBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.midNameBox.CustomButton.TabIndex = 1;
             this.midNameBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -180,7 +222,8 @@
             this.midNameBox.CustomButton.Visible = false;
             this.midNameBox.Enabled = false;
             this.midNameBox.Lines = new string[0];
-            this.midNameBox.Location = new System.Drawing.Point(168, 131);
+            this.midNameBox.Location = new System.Drawing.Point(252, 202);
+            this.midNameBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.midNameBox.MaxLength = 32767;
             this.midNameBox.Name = "midNameBox";
             this.midNameBox.PasswordChar = '\0';
@@ -189,7 +232,7 @@
             this.midNameBox.SelectionLength = 0;
             this.midNameBox.SelectionStart = 0;
             this.midNameBox.ShortcutsEnabled = true;
-            this.midNameBox.Size = new System.Drawing.Size(49, 23);
+            this.midNameBox.Size = new System.Drawing.Size(74, 35);
             this.midNameBox.TabIndex = 46;
             this.midNameBox.UseSelectable = true;
             this.midNameBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -201,9 +244,10 @@
             // 
             // 
             this.firstNameBox.CustomButton.Image = null;
-            this.firstNameBox.CustomButton.Location = new System.Drawing.Point(162, 1);
+            this.firstNameBox.CustomButton.Location = new System.Drawing.Point(242, 1);
+            this.firstNameBox.CustomButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.firstNameBox.CustomButton.Name = "";
-            this.firstNameBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.firstNameBox.CustomButton.Size = new System.Drawing.Size(33, 33);
             this.firstNameBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.firstNameBox.CustomButton.TabIndex = 1;
             this.firstNameBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -211,7 +255,8 @@
             this.firstNameBox.CustomButton.Visible = false;
             this.firstNameBox.Enabled = false;
             this.firstNameBox.Lines = new string[0];
-            this.firstNameBox.Location = new System.Drawing.Point(33, 173);
+            this.firstNameBox.Location = new System.Drawing.Point(50, 266);
+            this.firstNameBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.firstNameBox.MaxLength = 32767;
             this.firstNameBox.Name = "firstNameBox";
             this.firstNameBox.PasswordChar = '\0';
@@ -220,7 +265,7 @@
             this.firstNameBox.SelectionLength = 0;
             this.firstNameBox.SelectionStart = 0;
             this.firstNameBox.ShortcutsEnabled = true;
-            this.firstNameBox.Size = new System.Drawing.Size(184, 23);
+            this.firstNameBox.Size = new System.Drawing.Size(276, 35);
             this.firstNameBox.TabIndex = 45;
             this.firstNameBox.UseSelectable = true;
             this.firstNameBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -232,9 +277,10 @@
             // 
             // 
             this.lastNameBox.CustomButton.Image = null;
-            this.lastNameBox.CustomButton.Location = new System.Drawing.Point(107, 1);
+            this.lastNameBox.CustomButton.Location = new System.Drawing.Point(160, 1);
+            this.lastNameBox.CustomButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lastNameBox.CustomButton.Name = "";
-            this.lastNameBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.lastNameBox.CustomButton.Size = new System.Drawing.Size(33, 33);
             this.lastNameBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.lastNameBox.CustomButton.TabIndex = 1;
             this.lastNameBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -242,7 +288,8 @@
             this.lastNameBox.CustomButton.Visible = false;
             this.lastNameBox.Enabled = false;
             this.lastNameBox.Lines = new string[0];
-            this.lastNameBox.Location = new System.Drawing.Point(33, 131);
+            this.lastNameBox.Location = new System.Drawing.Point(50, 202);
+            this.lastNameBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lastNameBox.MaxLength = 32767;
             this.lastNameBox.Name = "lastNameBox";
             this.lastNameBox.PasswordChar = '\0';
@@ -251,236 +298,11 @@
             this.lastNameBox.SelectionLength = 0;
             this.lastNameBox.SelectionStart = 0;
             this.lastNameBox.ShortcutsEnabled = true;
-            this.lastNameBox.Size = new System.Drawing.Size(129, 23);
+            this.lastNameBox.Size = new System.Drawing.Size(194, 35);
             this.lastNameBox.TabIndex = 44;
             this.lastNameBox.UseSelectable = true;
             this.lastNameBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.lastNameBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // coursePanel
-            // 
-            this.coursePanel.Controls.Add(this.ENTREPselect);
-            this.coursePanel.Controls.Add(this.radioButton1);
-            this.coursePanel.Controls.Add(this.ENGselect);
-            this.coursePanel.Controls.Add(this.ITselect);
-            this.coursePanel.Controls.Add(this.HMselect);
-            this.coursePanel.Controls.Add(this.FMselect);
-            this.coursePanel.Controls.Add(this.MMselect);
-            this.coursePanel.Controls.Add(this.BEselect);
-            this.coursePanel.Controls.Add(this.DDGTselect);
-            this.coursePanel.Controls.Add(this.radioButton3);
-            this.coursePanel.Controls.Add(this.EXTselect);
-            this.coursePanel.Controls.Add(this.FSMselect);
-            this.coursePanel.Controls.Add(this.BEEDselect);
-            this.coursePanel.Controls.Add(this.GBAselect);
-            this.coursePanel.Controls.Add(this.MATHselect);
-            this.coursePanel.Controls.Add(this.SCIselect);
-            this.coursePanel.Controls.Add(this.FILselect);
-            this.coursePanel.Controls.Add(this.SOCSCIselect);
-            this.coursePanel.Enabled = false;
-            this.coursePanel.ForeColor = System.Drawing.Color.White;
-            this.coursePanel.Location = new System.Drawing.Point(21, 212);
-            this.coursePanel.Name = "coursePanel";
-            this.coursePanel.Size = new System.Drawing.Size(216, 154);
-            this.coursePanel.TabIndex = 43;
-            // 
-            // ENTREPselect
-            // 
-            this.ENTREPselect.AutoSize = true;
-            this.ENTREPselect.Location = new System.Drawing.Point(124, 71);
-            this.ENTREPselect.Name = "ENTREPselect";
-            this.ENTREPselect.Size = new System.Drawing.Size(69, 17);
-            this.ENTREPselect.TabIndex = 21;
-            this.ENTREPselect.TabStop = true;
-            this.ENTREPselect.Text = "ENTREP";
-            this.ENTREPselect.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(124, 117);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(75, 17);
-            this.radioButton1.TabIndex = 22;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "TOURISM";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // ENGselect
-            // 
-            this.ENGselect.AutoSize = true;
-            this.ENGselect.Location = new System.Drawing.Point(65, 94);
-            this.ENGselect.Name = "ENGselect";
-            this.ENGselect.Size = new System.Drawing.Size(48, 17);
-            this.ENGselect.TabIndex = 29;
-            this.ENGselect.TabStop = true;
-            this.ENGselect.Text = "ENG";
-            this.ENGselect.UseVisualStyleBackColor = true;
-            // 
-            // ITselect
-            // 
-            this.ITselect.AutoSize = true;
-            this.ITselect.Location = new System.Drawing.Point(15, 3);
-            this.ITselect.Name = "ITselect";
-            this.ITselect.Size = new System.Drawing.Size(35, 17);
-            this.ITselect.TabIndex = 16;
-            this.ITselect.TabStop = true;
-            this.ITselect.Text = "IT";
-            this.ITselect.UseVisualStyleBackColor = true;
-            // 
-            // HMselect
-            // 
-            this.HMselect.AutoSize = true;
-            this.HMselect.Location = new System.Drawing.Point(15, 26);
-            this.HMselect.Name = "HMselect";
-            this.HMselect.Size = new System.Drawing.Size(42, 17);
-            this.HMselect.TabIndex = 17;
-            this.HMselect.TabStop = true;
-            this.HMselect.Text = "HM";
-            this.HMselect.UseVisualStyleBackColor = true;
-            // 
-            // FMselect
-            // 
-            this.FMselect.AutoSize = true;
-            this.FMselect.Location = new System.Drawing.Point(15, 48);
-            this.FMselect.Name = "FMselect";
-            this.FMselect.Size = new System.Drawing.Size(40, 17);
-            this.FMselect.TabIndex = 18;
-            this.FMselect.TabStop = true;
-            this.FMselect.Text = "FM";
-            this.FMselect.UseVisualStyleBackColor = true;
-            // 
-            // MMselect
-            // 
-            this.MMselect.AutoSize = true;
-            this.MMselect.Location = new System.Drawing.Point(15, 71);
-            this.MMselect.Name = "MMselect";
-            this.MMselect.Size = new System.Drawing.Size(43, 17);
-            this.MMselect.TabIndex = 19;
-            this.MMselect.TabStop = true;
-            this.MMselect.Text = "MM";
-            this.MMselect.UseVisualStyleBackColor = true;
-            // 
-            // BEselect
-            // 
-            this.BEselect.AutoSize = true;
-            this.BEselect.Location = new System.Drawing.Point(65, 3);
-            this.BEselect.Name = "BEselect";
-            this.BEselect.Size = new System.Drawing.Size(39, 17);
-            this.BEselect.TabIndex = 20;
-            this.BEselect.TabStop = true;
-            this.BEselect.Text = "BE";
-            this.BEselect.UseVisualStyleBackColor = true;
-            // 
-            // DDGTselect
-            // 
-            this.DDGTselect.AutoSize = true;
-            this.DDGTselect.Location = new System.Drawing.Point(65, 26);
-            this.DDGTselect.Name = "DDGTselect";
-            this.DDGTselect.Size = new System.Drawing.Size(56, 17);
-            this.DDGTselect.TabIndex = 23;
-            this.DDGTselect.TabStop = true;
-            this.DDGTselect.Text = "DDGT";
-            this.DDGTselect.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(124, 94);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(78, 17);
-            this.radioButton3.TabIndex = 24;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "COMTECH";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // EXTselect
-            // 
-            this.EXTselect.AutoSize = true;
-            this.EXTselect.Location = new System.Drawing.Point(65, 48);
-            this.EXTselect.Name = "EXTselect";
-            this.EXTselect.Size = new System.Drawing.Size(46, 17);
-            this.EXTselect.TabIndex = 25;
-            this.EXTselect.TabStop = true;
-            this.EXTselect.Text = "EXT";
-            this.EXTselect.UseVisualStyleBackColor = true;
-            // 
-            // FSMselect
-            // 
-            this.FSMselect.AutoSize = true;
-            this.FSMselect.Location = new System.Drawing.Point(65, 71);
-            this.FSMselect.Name = "FSMselect";
-            this.FSMselect.Size = new System.Drawing.Size(47, 17);
-            this.FSMselect.TabIndex = 26;
-            this.FSMselect.TabStop = true;
-            this.FSMselect.Text = "FSM";
-            this.FSMselect.UseVisualStyleBackColor = true;
-            // 
-            // BEEDselect
-            // 
-            this.BEEDselect.AutoSize = true;
-            this.BEEDselect.Location = new System.Drawing.Point(124, 3);
-            this.BEEDselect.Name = "BEEDselect";
-            this.BEEDselect.Size = new System.Drawing.Size(54, 17);
-            this.BEEDselect.TabIndex = 27;
-            this.BEEDselect.TabStop = true;
-            this.BEEDselect.Text = "BEED";
-            this.BEEDselect.UseVisualStyleBackColor = true;
-            // 
-            // GBAselect
-            // 
-            this.GBAselect.AutoSize = true;
-            this.GBAselect.Location = new System.Drawing.Point(65, 117);
-            this.GBAselect.Name = "GBAselect";
-            this.GBAselect.Size = new System.Drawing.Size(47, 17);
-            this.GBAselect.TabIndex = 33;
-            this.GBAselect.TabStop = true;
-            this.GBAselect.Text = "GBA";
-            this.GBAselect.UseVisualStyleBackColor = true;
-            // 
-            // MATHselect
-            // 
-            this.MATHselect.AutoSize = true;
-            this.MATHselect.Location = new System.Drawing.Point(124, 26);
-            this.MATHselect.Name = "MATHselect";
-            this.MATHselect.Size = new System.Drawing.Size(56, 17);
-            this.MATHselect.TabIndex = 28;
-            this.MATHselect.TabStop = true;
-            this.MATHselect.Text = "MATH";
-            this.MATHselect.UseVisualStyleBackColor = true;
-            // 
-            // SCIselect
-            // 
-            this.SCIselect.AutoSize = true;
-            this.SCIselect.Location = new System.Drawing.Point(15, 117);
-            this.SCIselect.Name = "SCIselect";
-            this.SCIselect.Size = new System.Drawing.Size(42, 17);
-            this.SCIselect.TabIndex = 32;
-            this.SCIselect.TabStop = true;
-            this.SCIselect.Text = "SCI";
-            this.SCIselect.UseVisualStyleBackColor = true;
-            // 
-            // FILselect
-            // 
-            this.FILselect.AutoSize = true;
-            this.FILselect.Location = new System.Drawing.Point(15, 94);
-            this.FILselect.Name = "FILselect";
-            this.FILselect.Size = new System.Drawing.Size(40, 17);
-            this.FILselect.TabIndex = 30;
-            this.FILselect.TabStop = true;
-            this.FILselect.Text = "FIL";
-            this.FILselect.UseVisualStyleBackColor = true;
-            // 
-            // SOCSCIselect
-            // 
-            this.SOCSCIselect.AutoSize = true;
-            this.SOCSCIselect.Location = new System.Drawing.Point(124, 48);
-            this.SOCSCIselect.Name = "SOCSCIselect";
-            this.SOCSCIselect.Size = new System.Drawing.Size(64, 17);
-            this.SOCSCIselect.TabIndex = 31;
-            this.SOCSCIselect.TabStop = true;
-            this.SOCSCIselect.Text = "SOCSCI";
-            this.SOCSCIselect.UseVisualStyleBackColor = true;
             // 
             // editStudNo
             // 
@@ -488,10 +310,11 @@
             // 
             // 
             this.editStudNo.CustomButton.BackColor = System.Drawing.Color.Transparent;
-            this.editStudNo.CustomButton.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
-            this.editStudNo.CustomButton.Location = new System.Drawing.Point(160, 2);
+            this.editStudNo.CustomButton.Image = null;
+            this.editStudNo.CustomButton.Location = new System.Drawing.Point(238, 2);
+            this.editStudNo.CustomButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.editStudNo.CustomButton.Name = "";
-            this.editStudNo.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.editStudNo.CustomButton.Size = new System.Drawing.Size(35, 35);
             this.editStudNo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.editStudNo.CustomButton.TabIndex = 1;
             this.editStudNo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -500,7 +323,8 @@
             this.editStudNo.CustomButton.Visible = false;
             this.editStudNo.Enabled = false;
             this.editStudNo.Lines = new string[0];
-            this.editStudNo.Location = new System.Drawing.Point(33, 88);
+            this.editStudNo.Location = new System.Drawing.Point(50, 135);
+            this.editStudNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.editStudNo.MaxLength = 32767;
             this.editStudNo.Name = "editStudNo";
             this.editStudNo.PasswordChar = '\0';
@@ -509,7 +333,7 @@
             this.editStudNo.SelectionLength = 0;
             this.editStudNo.SelectionStart = 0;
             this.editStudNo.ShortcutsEnabled = true;
-            this.editStudNo.Size = new System.Drawing.Size(184, 26);
+            this.editStudNo.Size = new System.Drawing.Size(276, 40);
             this.editStudNo.TabIndex = 42;
             this.editStudNo.UseSelectable = true;
             this.editStudNo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -518,9 +342,10 @@
             // addbtn
             // 
             this.addbtn.Enabled = false;
-            this.addbtn.Location = new System.Drawing.Point(33, 417);
+            this.addbtn.Location = new System.Drawing.Point(50, 642);
+            this.addbtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(104, 33);
+            this.addbtn.Size = new System.Drawing.Size(156, 51);
             this.addbtn.TabIndex = 41;
             this.addbtn.Text = "Update";
             this.addbtn.UseSelectable = true;
@@ -531,125 +356,15 @@
             this.gendercom.Enabled = false;
             this.gendercom.FormattingEnabled = true;
             this.gendercom.ItemHeight = 23;
-            this.gendercom.Location = new System.Drawing.Point(33, 374);
+            this.gendercom.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.gendercom.Location = new System.Drawing.Point(50, 575);
+            this.gendercom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gendercom.Name = "gendercom";
-            this.gendercom.Size = new System.Drawing.Size(121, 29);
+            this.gendercom.Size = new System.Drawing.Size(180, 29);
             this.gendercom.TabIndex = 40;
             this.gendercom.UseSelectable = true;
-            // 
-            // viewgrid
-            // 
-            this.viewgrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(212)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.viewgrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.viewgrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.viewgrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.viewgrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.viewgrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.viewgrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.viewgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.viewgrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.viewgrid.DefaultCellStyle = dataGridViewCellStyle7;
-            this.viewgrid.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.viewgrid.EnableHeadersVisualStyles = false;
-            this.viewgrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.viewgrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.viewgrid.Location = new System.Drawing.Point(0, 88);
-            this.viewgrid.Name = "viewgrid";
-            this.viewgrid.ReadOnly = true;
-            this.viewgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.viewgrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.viewgrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.viewgrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.viewgrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.viewgrid.Size = new System.Drawing.Size(758, 593);
-            this.viewgrid.Style = MetroFramework.MetroColorStyle.Lime;
-            this.viewgrid.TabIndex = 127;
-            this.viewgrid.UseCustomBackColor = true;
-            this.viewgrid.UseCustomForeColor = true;
-            this.viewgrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.viewgrid_CellClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Student No.";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Last Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "First Name";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "M. I.";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 55;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Course";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Gender";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Library Visits";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Last Visit";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 120;
             // 
             // searchbox
             // 
@@ -658,9 +373,10 @@
             // 
             this.searchbox.CustomButton.BackColor = System.Drawing.Color.Transparent;
             this.searchbox.CustomButton.Image = null;
-            this.searchbox.CustomButton.Location = new System.Drawing.Point(157, 2);
+            this.searchbox.CustomButton.Location = new System.Drawing.Point(234, 2);
+            this.searchbox.CustomButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.searchbox.CustomButton.Name = "";
-            this.searchbox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.searchbox.CustomButton.Size = new System.Drawing.Size(35, 35);
             this.searchbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.searchbox.CustomButton.TabIndex = 1;
             this.searchbox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -668,7 +384,8 @@
             this.searchbox.CustomButton.UseVisualStyleBackColor = false;
             this.searchbox.DisplayIcon = true;
             this.searchbox.Lines = new string[0];
-            this.searchbox.Location = new System.Drawing.Point(15, 51);
+            this.searchbox.Location = new System.Drawing.Point(22, 78);
+            this.searchbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.searchbox.MaxLength = 32767;
             this.searchbox.Name = "searchbox";
             this.searchbox.PasswordChar = '\0';
@@ -680,7 +397,7 @@
             this.searchbox.ShortcutsEnabled = true;
             this.searchbox.ShowButton = true;
             this.searchbox.ShowClearButton = true;
-            this.searchbox.Size = new System.Drawing.Size(181, 26);
+            this.searchbox.Size = new System.Drawing.Size(272, 40);
             this.searchbox.TabIndex = 128;
             this.searchbox.UseSelectable = true;
             this.searchbox.WaterMark = "Student Number or Name";
@@ -698,11 +415,11 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(202, 51);
+            this.button1.Location = new System.Drawing.Point(303, 78);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 26);
+            this.button1.Size = new System.Drawing.Size(146, 40);
             this.button1.TabIndex = 130;
             this.button1.Text = "Add Record";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -718,11 +435,11 @@
             this.deleteStudbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteStudbtn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteStudbtn.ForeColor = System.Drawing.Color.Black;
-            this.deleteStudbtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteStudbtn.Image")));
             this.deleteStudbtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.deleteStudbtn.Location = new System.Drawing.Point(305, 51);
+            this.deleteStudbtn.Location = new System.Drawing.Point(458, 78);
+            this.deleteStudbtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.deleteStudbtn.Name = "deleteStudbtn";
-            this.deleteStudbtn.Size = new System.Drawing.Size(102, 26);
+            this.deleteStudbtn.Size = new System.Drawing.Size(153, 40);
             this.deleteStudbtn.TabIndex = 131;
             this.deleteStudbtn.Text = "Delete Record";
             this.deleteStudbtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -738,11 +455,11 @@
             this.copyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.copyBtn.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.copyBtn.ForeColor = System.Drawing.Color.Black;
-            this.copyBtn.Image = ((System.Drawing.Image)(resources.GetObject("copyBtn.Image")));
             this.copyBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.copyBtn.Location = new System.Drawing.Point(413, 51);
+            this.copyBtn.Location = new System.Drawing.Point(620, 78);
+            this.copyBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.copyBtn.Name = "copyBtn";
-            this.copyBtn.Size = new System.Drawing.Size(102, 26);
+            this.copyBtn.Size = new System.Drawing.Size(153, 40);
             this.copyBtn.TabIndex = 135;
             this.copyBtn.Text = "Copy Student No.";
             this.copyBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -759,9 +476,10 @@
             this.visitBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.visitBtn.ForeColor = System.Drawing.Color.Black;
             this.visitBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.visitBtn.Location = new System.Drawing.Point(658, 51);
+            this.visitBtn.Location = new System.Drawing.Point(987, 78);
+            this.visitBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.visitBtn.Name = "visitBtn";
-            this.visitBtn.Size = new System.Drawing.Size(87, 26);
+            this.visitBtn.Size = new System.Drawing.Size(130, 40);
             this.visitBtn.TabIndex = 134;
             this.visitBtn.Text = "Visit History";
             this.visitBtn.UseVisualStyleBackColor = false;
@@ -773,9 +491,10 @@
             this.focusHere.BackColor = System.Drawing.Color.Transparent;
             this.focusHere.Font = new System.Drawing.Font("Segoe UI Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusHere.ForeColor = System.Drawing.Color.White;
-            this.focusHere.Location = new System.Drawing.Point(11, 5);
+            this.focusHere.Location = new System.Drawing.Point(16, 8);
+            this.focusHere.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.focusHere.Name = "focusHere";
-            this.focusHere.Size = new System.Drawing.Size(260, 37);
+            this.focusHere.Size = new System.Drawing.Size(397, 55);
             this.focusHere.TabIndex = 133;
             this.focusHere.Text = "View Student Records";
             // 
@@ -783,9 +502,10 @@
             // 
             this.clipPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.clipPanel.Controls.Add(this.label1);
-            this.clipPanel.Location = new System.Drawing.Point(391, 20);
+            this.clipPanel.Location = new System.Drawing.Point(586, 31);
+            this.clipPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.clipPanel.Name = "clipPanel";
-            this.clipPanel.Size = new System.Drawing.Size(139, 22);
+            this.clipPanel.Size = new System.Drawing.Size(208, 34);
             this.clipPanel.TabIndex = 136;
             this.clipPanel.Visible = false;
             // 
@@ -794,19 +514,148 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(7, 2);
+            this.label1.Location = new System.Drawing.Point(10, 3);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 17);
+            this.label1.Size = new System.Drawing.Size(193, 28);
             this.label1.TabIndex = 102;
             this.label1.Text = "Added to clipboard!";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.studentsRecord);
+            this.panel1.Location = new System.Drawing.Point(15, 135);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1115, 632);
+            this.panel1.TabIndex = 137;
+            // 
+            // studentsRecord
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.studentsRecord.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.studentsRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.studentsRecord.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
+            this.studentsRecord.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.studentsRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.studentsRecord.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.studentNumber,
+            this.firstName,
+            this.lastName,
+            this.middleInitials,
+            this.course,
+            this.gender,
+            this.numberOfVisits,
+            this.lastVisit});
+            this.studentsRecord.ContextMenuStrip = this.contextMenuStrip1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.studentsRecord.DefaultCellStyle = dataGridViewCellStyle2;
+            this.studentsRecord.Location = new System.Drawing.Point(0, 0);
+            this.studentsRecord.Name = "studentsRecord";
+            this.studentsRecord.ReadOnly = true;
+            this.studentsRecord.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.studentsRecord.RowHeadersWidth = 20;
+            this.studentsRecord.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.studentsRecord.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.studentsRecord.RowTemplate.Height = 28;
+            this.studentsRecord.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.studentsRecord.Size = new System.Drawing.Size(1115, 632);
+            this.studentsRecord.TabIndex = 0;
+            // 
+            // studentNumber
+            // 
+            this.studentNumber.HeaderText = "Student Number";
+            this.studentNumber.Name = "studentNumber";
+            this.studentNumber.ReadOnly = true;
+            // 
+            // firstName
+            // 
+            this.firstName.HeaderText = "First Name";
+            this.firstName.Name = "firstName";
+            this.firstName.ReadOnly = true;
+            // 
+            // lastName
+            // 
+            this.lastName.HeaderText = "Last Name";
+            this.lastName.Name = "lastName";
+            this.lastName.ReadOnly = true;
+            // 
+            // middleInitials
+            // 
+            this.middleInitials.HeaderText = "M.I.";
+            this.middleInitials.Name = "middleInitials";
+            this.middleInitials.ReadOnly = true;
+            // 
+            // course
+            // 
+            this.course.HeaderText = "Course";
+            this.course.Name = "course";
+            this.course.ReadOnly = true;
+            // 
+            // gender
+            // 
+            this.gender.HeaderText = "Gender";
+            this.gender.Name = "gender";
+            this.gender.ReadOnly = true;
+            // 
+            // numberOfVisits
+            // 
+            this.numberOfVisits.HeaderText = "Number Of Visits";
+            this.numberOfVisits.Name = "numberOfVisits";
+            this.numberOfVisits.ReadOnly = true;
+            this.numberOfVisits.Visible = false;
+            // 
+            // lastVisit
+            // 
+            this.lastVisit.HeaderText = "Last Visits";
+            this.lastVisit.Name = "lastVisit";
+            this.lastVisit.ReadOnly = true;
+            this.lastVisit.Visible = false;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyStudentNoToolStripMenuItem,
+            this.updateRecordToolStripMenuItem,
+            this.deleteRecordToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(226, 116);
+            // 
+            // copyStudentNoToolStripMenuItem
+            // 
+            this.copyStudentNoToolStripMenuItem.Name = "copyStudentNoToolStripMenuItem";
+            this.copyStudentNoToolStripMenuItem.Size = new System.Drawing.Size(225, 30);
+            this.copyStudentNoToolStripMenuItem.Text = "Copy Student No.";
+            this.copyStudentNoToolStripMenuItem.Click += new System.EventHandler(this.copyStudentNoToolStripMenuItem_Click);
+            // 
+            // updateRecordToolStripMenuItem
+            // 
+            this.updateRecordToolStripMenuItem.Name = "updateRecordToolStripMenuItem";
+            this.updateRecordToolStripMenuItem.Size = new System.Drawing.Size(225, 30);
+            this.updateRecordToolStripMenuItem.Text = "Update Record";
+            this.updateRecordToolStripMenuItem.Click += new System.EventHandler(this.updateRecordToolStripMenuItem_Click);
+            // 
+            // deleteRecordToolStripMenuItem
+            // 
+            this.deleteRecordToolStripMenuItem.Name = "deleteRecordToolStripMenuItem";
+            this.deleteRecordToolStripMenuItem.Size = new System.Drawing.Size(225, 30);
+            this.deleteRecordToolStripMenuItem.Text = "Delete Record";
+            this.deleteRecordToolStripMenuItem.Click += new System.EventHandler(this.deleteRecordToolStripMenuItem_Click);
+            // 
             // UserInfoTab
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(120)))), ((int)(((byte)(208)))));
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.clipPanel);
-            this.Controls.Add(this.viewgrid);
             this.Controls.Add(this.searchbox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.deleteStudbtn);
@@ -814,15 +663,18 @@
             this.Controls.Add(this.visitBtn);
             this.Controls.Add(this.focusHere);
             this.Controls.Add(this.panel31);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserInfoTab";
-            this.Size = new System.Drawing.Size(1016, 681);
+            this.Size = new System.Drawing.Size(1524, 1048);
             this.panel31.ResumeLayout(false);
             this.panel31.PerformLayout();
-            this.coursePanel.ResumeLayout(false);
-            this.coursePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.viewgrid)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.clipPanel.ResumeLayout(false);
             this.clipPanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.studentsRecord)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -839,37 +691,9 @@
         private MetroFramework.Controls.MetroTextBox midNameBox;
         private MetroFramework.Controls.MetroTextBox firstNameBox;
         private MetroFramework.Controls.MetroTextBox lastNameBox;
-        private System.Windows.Forms.Panel coursePanel;
-        private System.Windows.Forms.RadioButton ENTREPselect;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton ENGselect;
-        private System.Windows.Forms.RadioButton ITselect;
-        private System.Windows.Forms.RadioButton HMselect;
-        private System.Windows.Forms.RadioButton FMselect;
-        private System.Windows.Forms.RadioButton MMselect;
-        private System.Windows.Forms.RadioButton BEselect;
-        private System.Windows.Forms.RadioButton DDGTselect;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton EXTselect;
-        private System.Windows.Forms.RadioButton FSMselect;
-        private System.Windows.Forms.RadioButton BEEDselect;
-        private System.Windows.Forms.RadioButton GBAselect;
-        private System.Windows.Forms.RadioButton MATHselect;
-        private System.Windows.Forms.RadioButton SCIselect;
-        private System.Windows.Forms.RadioButton FILselect;
-        private System.Windows.Forms.RadioButton SOCSCIselect;
         private MetroFramework.Controls.MetroTextBox editStudNo;
         private MetroFramework.Controls.MetroButton addbtn;
         private MetroFramework.Controls.MetroComboBox gendercom;
-        private MetroFramework.Controls.MetroGrid viewgrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private MetroFramework.Controls.MetroTextBox searchbox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button deleteStudbtn;
@@ -878,5 +702,23 @@
         private System.Windows.Forms.Label focusHere;
         private System.Windows.Forms.Panel clipPanel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView studentsRecord;
+        private System.Windows.Forms.DataGridViewTextBoxColumn studentNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn middleInitials;
+        private System.Windows.Forms.DataGridViewTextBoxColumn course;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberOfVisits;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastVisit;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button courseButton;
+        public System.Windows.Forms.TextBox coursebox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem copyStudentNoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateRecordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteRecordToolStripMenuItem;
     }
 }

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+using libraryForm.Controllers;
+
 namespace libraryForm
 {
     public partial class Others : Form
@@ -16,6 +18,7 @@ namespace libraryForm
         public Others()
         {
             InitializeComponent();
+            this.TopMost = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -45,66 +48,27 @@ namespace libraryForm
             }
         }
 
+        
+
         private void logButton_Click(object sender, EventArgs e)
         {
-            if (faculty)
+            string department = "";
+            string label = "";
+            
+            if (facultySelect.Checked)
             {
-                if (!string.IsNullOrWhiteSpace(nameBox.Text) && !string.IsNullOrWhiteSpace(deptCom.Text))
-                {
-                    using (SqlConnection conn = new SqlConnection("server=Library\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=false;"))
-                    {
-                        conn.Open();
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO othersInfo (fullName, department) VALUES " +
-                                                                                     "('" + nameBox.Text + "', '" + deptCom.Text + "')", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SqlCommand cmd = new SqlCommand("UPDATE dailyStats SET Faculty = Faculty + 1 WHERE dayNumber = (SELECT MAX(dayNumber) FROM dailyStats)", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SqlCommand cmd = new SqlCommand("UPDATE weeklyStats SET Faculty = Faculty + 1 WHERE weekNumber = (SELECT MAX(weekNumber) FROM weeklyStats)", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SqlCommand cmd = new SqlCommand("UPDATE monthlyStats SET Faculty = Faculty + 1 WHERE monthNumber = (SELECT MAX(monthNumber) FROM monthlyStats)", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    MessageBox.Show("Guest logged!");
-                    this.Close();
-                }
+                label = "faculty";
+                department = deptCom.SelectedItem.ToString();
             }
-            else
+            else if (othersSelect.Checked)
             {
-                if (!string.IsNullOrWhiteSpace(nameBox.Text))
-                {
-                    using (SqlConnection conn = new SqlConnection("server=Library\\SQLEXPRESS;database=Library;User ID=sa;Password=bsusclibrary;Integrated Security=false;"))
-                    {
-                        conn.Open();
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO othersInfo (fullName) VALUES " +
-                                                                                     "('" + nameBox.Text + "')", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SqlCommand cmd = new SqlCommand("UPDATE dailyStats SET Others = Others + 1 WHERE dayNumber = (SELECT MAX(dayNumber) FROM dailyStats)", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SqlCommand cmd = new SqlCommand("UPDATE weeklyStats SET Others = Others + 1 WHERE weekNumber = (SELECT MAX(weekNumber) FROM weeklyStats)", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SqlCommand cmd = new SqlCommand("UPDATE monthlyStats SET Others = Others + 1 WHERE monthNumber = (SELECT MAX(monthNumber) FROM monthlyStats)", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    MessageBox.Show("Guest logged!");
-                    this.Close();
-                }
+                label = "outside";
             }
+
+            string fullName = nameBox.Text;
+            
+
+            LogsController.AddLogs(fullName, department, label, "others");
         }
     }
 }

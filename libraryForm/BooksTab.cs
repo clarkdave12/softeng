@@ -13,54 +13,68 @@ namespace libraryForm
 {
     public partial class BooksTab : UserControl
     {
+
+        // Singleton Instance
+        private static BooksTab instance;
+        
+        public static BooksTab Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new BooksTab();
+                return instance;
+            }
+        }
+
         public BooksTab()
         {
             InitializeComponent();
 
-            Singleton.parent = (Form1)this.ParentForm;
+            //Singleton.parent = (Form1)this.ParentForm;
 
-            Connection.OpenConnection();
-            int i = 0;
-            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", Connection.conn))
-            {
-                Singleton.courseLim = (int)cmd.ExecuteScalar();
-                Singleton.courseLim = Singleton.courseLim - 3;
-                Singleton.course = new string[Singleton.courseLim];
-            }
-            using (SqlCommand cmd = new SqlCommand("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", Connection.conn))
-            {
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (i < 2 || i == Singleton.courseLim + 2)
-                    {
-                        i++;
-                        continue;
-                    }
-                    Singleton.course[i - 2] = reader[0].ToString();
-                    i++;
-                }
-                reader.Close();
-                i = 0;
-            }
-            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'dailyBookStats'", Connection.conn))
-            {
-                Singleton.booksLim = (int)cmd.ExecuteScalar();
-                Singleton.booksLim = Singleton.booksLim - 1;
-            }
-            using (SqlCommand cmd = new SqlCommand("SELECT date FROM [dailyBookStats] ORDER BY recordNumber DESC", Connection.conn))
-            {
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    dailyBooksCom1.Items.Add(reader[0].ToString());
-                }
-                booksDatesRad.Checked = true;
-                reader.Close();
-                dailyBooksCom1.SelectedIndex = 0;
-                booksDatesRad.Checked = true;
-            }
-            Connection.CloseConnection();
+            //Connection.OpenConnection();
+            //int i = 0;
+            //using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", Connection.conn))
+            //{
+            //    //Singleton.courseLim = (int)cmd.ExecuteScalar();
+            //    Singleton.courseLim = Singleton.courseLim - 3;
+            //    //Singleton.course = new string[Singleton.courseLim];
+            //}
+            //using (SqlCommand cmd = new SqlCommand("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME = 'weeklyStats'", Connection.conn))
+            //{
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (i < 2 || i == Singleton.courseLim + 2)
+            //        {
+            //            i++;
+            //            continue;
+            //        }
+            //        Singleton.course[i - 2] = reader[0].ToString();
+            //        i++;
+            //    }
+            //    reader.Close();
+            //    i = 0;
+            //}
+            //using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM information_schema.columns WHERE TABLE_NAME = 'dailyBookStats'", Connection.conn))
+            //{
+            //    Singleton.booksLim = (int)cmd.ExecuteScalar();
+            //    Singleton.booksLim = Singleton.booksLim - 1;
+            //}
+            //using (SqlCommand cmd = new SqlCommand("SELECT date FROM [dailyBookStats] ORDER BY recordNumber DESC", Connection.conn))
+            //{
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        dailyBooksCom1.Items.Add(reader[0].ToString());
+            //    }
+            //    booksDatesRad.Checked = true;
+            //    reader.Close();
+            //    dailyBooksCom1.SelectedIndex = 0;
+            //    booksDatesRad.Checked = true;
+            //}
+            //Connection.CloseConnection();
 
         }
         
